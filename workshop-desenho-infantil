@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop de Desenho - Guia Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --coral: #FF6B6B;
+  --yellow: #FFD93D;
+  --mint: #6BCB77;
+  --sky: #4D96FF;
+  --lavender: #C084FC;
+  --peach: #FBBF77;
+  --bg: #FFF8F0;
+  --text: #2D2A32;
+  --card: #FFFFFF;
+  --shadow: 0 4px 20px rgba(45, 42, 50, 0.08);
+  --shadow-hover: 0 8px 32px rgba(45, 42, 50, 0.14);
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.hero {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 30%, #6BCB77 60%, #4D96FF 100%);
+  padding: 60px 24px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='4' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E");
+  animation: drift 20s linear infinite;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-60px); }
+}
+
+.hero h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: white;
+  text-shadow: 2px 3px 0 rgba(0,0,0,0.1);
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.hero .subtitle {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+  position: relative;
+}
+
+.hero .emoji-row {
+  font-size: 2rem;
+  margin-top: 16px;
+  position: relative;
+}
+
+/* NAV TABS */
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-tab {
+  padding: 14px 20px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #888;
+  transition: all 0.25s;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active {
+  color: var(--coral);
+  border-bottom-color: var(--coral);
+  font-weight: 600;
+}
+
+/* SECTIONS */
+.section {
+  display: none;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  animation: fadeUp 0.4s ease;
+}
+
+.section.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 28px 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s;
+  border-left: 5px solid var(--sky);
+}
+
+.card:hover { box-shadow: var(--shadow-hover); }
+
+.card.coral { border-left-color: var(--coral); }
+.card.yellow { border-left-color: var(--yellow); }
+.card.mint { border-left-color: var(--mint); }
+.card.lavender { border-left-color: var(--lavender); }
+.card.peach { border-left-color: var(--peach); }
+.card.sky { border-left-color: var(--sky); }
+
+.card h3 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card p, .card li {
+  font-size: 0.98rem;
+  color: #4A4553;
+  margin-bottom: 8px;
+}
+
+.card ul { padding-left: 20px; }
+.card li { list-style: none; position: relative; padding-left: 6px; }
+.card li::before { content: '→ '; color: var(--coral); font-weight: 700; }
+
+/* SECTION HEADERS */
+.section-header {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: #777;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--coral), var(--yellow), var(--mint), var(--sky), var(--lavender));
+  border-radius: 3px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 26px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--coral);
+  z-index: 2;
+}
+
+.timeline-item:nth-child(2)::before { border-color: var(--yellow); }
+.timeline-item:nth-child(3)::before { border-color: var(--mint); }
+.timeline-item:nth-child(4)::before { border-color: var(--sky); }
+.timeline-item:nth-child(5)::before { border-color: var(--lavender); }
+.timeline-item:nth-child(6)::before { border-color: var(--peach); }
+.timeline-item:nth-child(7)::before { border-color: var(--coral); }
+
+.timeline-item .time-badge {
+  display: inline-block;
+  background: var(--coral);
+  color: white;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.82rem;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.timeline-item:nth-child(2) .time-badge { background: var(--yellow); color: #5a4a00; }
+.timeline-item:nth-child(3) .time-badge { background: var(--mint); color: white; }
+.timeline-item:nth-child(4) .time-badge { background: var(--sky); }
+.timeline-item:nth-child(5) .time-badge { background: var(--lavender); }
+.timeline-item:nth-child(6) .time-badge { background: var(--peach); color: #5a4a00; }
+.timeline-item:nth-child(7) .time-badge { background: var(--coral); }
+
+.timeline-item h4 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  font-size: 0.93rem;
+  color: #555;
+}
+
+/* PRINCIPLE GRID */
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.principle-card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.principle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.principle-icon {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.principle-card h4 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.principle-card p {
+  font-size: 0.88rem;
+  color: #666;
+}
+
+/* DIFFICULTY LEVELS */
+.level-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.level-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.level-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #E8E4EF;
+}
+
+.level-dot.filled { background: var(--mint); }
+.level-dot.filled.medium { background: var(--yellow); }
+.level-dot.filled.hard { background: var(--coral); }
+
+.level-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #777;
+}
+
+/* ALERT BOX */
+.alert-box {
+  background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  border: 2px dashed var(--mint);
+}
+
+.alert-box.warning {
+  background: linear-gradient(135deg, #FFF3E0, #FFF8E1);
+  border-color: var(--peach);
+}
+
+.alert-box.info {
+  background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
+  border-color: var(--lavender);
+}
+
+.alert-box h4 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.alert-box p {
+  font-size: 0.92rem;
+  color: #555;
+}
+
+/* CHARACTER GALLERY */
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.char-card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.char-card:hover { transform: scale(1.03); }
+
+.char-emoji { font-size: 2.5rem; margin-bottom: 8px; }
+
+.char-card h5 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.char-card .steps-count {
+  font-size: 0.82rem;
+  color: #999;
+}
+
+/* CHECKLIST */
+.checklist {
+  columns: 2;
+  column-gap: 24px;
+  margin: 16px 0;
+}
+
+.checklist-item {
+  break-inside: avoid;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 0.95rem;
+}
+
+.check-box {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid #D4CFE0;
+  border-radius: 6px;
+  margin-top: 2px;
+}
+
+/* PRINT */
+@media print {
+  .nav-tabs { display: none; }
+  .section { display: block !important; page-break-inside: avoid; }
+  .hero { padding: 30px; }
+}
+
+@media (max-width: 600px) {
+  .checklist { columns: 1; }
+  .nav-tab { padding: 10px 12px; font-size: 0.82rem; }
+  .card { padding: 20px; }
+  .section { padding: 28px 16px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Workshop de Desenho para Crianças</h1>
+  <div class="subtitle">Guia Metodológico Completo — Inclusivo para Crianças Autistas</div>
+  <div class="emoji-row">🎨 ✏️ 🌟</div>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('metodologia')">Metodologia</button>
+  <button class="nav-tab" onclick="showSection('roteiro')">Roteiro</button>
+  <button class="nav-tab" onclick="showSection('personagens')">Personagens</button>
+  <button class="nav-tab" onclick="showSection('inclusao')">Inclusão</button>
+  <!-- <button class="nav-tab" onclick="showSection('materiais')">Materiais</button> -->
+  <!-- <button class="nav-tab" onclick="showSection('dicas')">Dicas Práticas</button> -->
+</nav>
+
+<!-- ===================== METODOLOGIA ===================== -->
+<div id="metodologia" class="section active">
+  <h2 class="section-header">🧩 Metodologia</h2>
+  <p class="section-sub">Princípios fundamentais que orientam todo o workshop</p>
+
+  <div class="principle-grid">
+    <div class="principle-card">
+      <div class="principle-icon">🔵</div>
+      <h4>Formas Geométricas</h4>
+      <p>Todo personagem começa com formas simples: círculos, retângulos, ovais. Isso reduz a ansiedade do "papel em branco".</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🪜</div>
+      <h4>Passo a Passo Visual</h4>
+      <p>Cada personagem é decomposto em 6 a 9 etapas claras, com destaque visual no que é adicionado em cada passo.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🎯</div>
+      <h4>Repetição Progressiva</h4>
+      <p>Os mesmos princípios aparecem em todos os personagens, reforçando a aprendizagem por camadas.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🧠</div>
+      <h4>Abordagem Multissensorial</h4>
+      <p>Combinar instruções visuais (fichas), verbais (explicação) e cinestésicas (desenhar junto) para diferentes perfis.</p>
+    </div>
+  </div>
+
+  <div class="card mint">
+    <h3>📐 O Método "Forma → Detalhe → Expressão"</h3>
+    <p>Baseado na análise das suas referências, todos os tutoriais seguem a mesma estrutura em 3 fases:</p>
+    <ul>
+      <li><strong>Fase 1 — Silhueta Base:</strong> Formas geométricas grandes que definem a proporção do personagem (ex: oval para a cabeça do Totoro, retângulo para o corpo da Bluey)</li>
+      <li><strong>Fase 2 — Elementos Característicos:</strong> Adição de traços que tornam o personagem reconhecível (olhos, orelhas, cabelo, acessórios)</li>
+      <li><strong>Fase 3 — Detalhes e Finalização:</strong> Linhas finais, pequenos detalhes e, opcionalmente, cor</li>
+    </ul>
+    <p style="margin-top: 12px;">Esse padrão de 3 fases é consistente em <em>todas</em> as 12 referências que você trouxe — de Goku a Doraemon, de Bluey a Naruto. Isso confirma que é uma abordagem universal e eficaz.</p>
+  </div>
+
+  <div class="card coral">
+    <h3>🧒 Por que funciona para crianças autistas?</h3>
+    <ul>
+      <li><strong>Previsibilidade:</strong> A estrutura sempre igual (forma → detalhe → expressão) cria um padrão previsível que reduz ansiedade</li>
+      <li><strong>Suporte Visual:</strong> As fichas com passos numerados são concretas e consultáveis a qualquer momento</li>
+      <li><strong>Autonomia sem pressão:</strong> Cada criança avança no seu ritmo, pois o passo a passo está disponível visualmente</li>
+      <li><strong>Interesse especial como porta de entrada:</strong> Muitas crianças no espectro têm interesses intensos em personagens — o workshop usa isso como motivador</li>
+      <li><strong>Resultados tangíveis:</strong> O produto final é concreto e reconhecível, gerando senso de conquista</li>
+    </ul>
+  </div>
+
+  <div class="card lavender">
+    <h3>🔄 Progressão de Dificuldade</h3>
+    <p>Organize os personagens do mais simples ao mais complexo:</p>
+    <div class="level-bar">
+      <div class="level-dots">
+        <div class="level-dot filled"></div>
+        <div class="level-dot"></div>
+        <div class="level-dot"></div>
+      </div>
+      <span class="level-label">Fácil — Doraemon, Totoro, Minion (formas arredondadas, simétricos)</span>
+    </div>
+    <div class="level-bar">
+      <div class="level-dots">
+        <div class="level-dot filled medium"></div>
+        <div class="level-dot filled medium"></div>
+        <div class="level-dot"></div>
+      </div>
+      <span class="level-label">Médio — Bluey, Bingo, Jake (formas retangulares + membros)</span>
+    </div>
+    <div class="level-bar">
+      <div class="level-dots">
+        <div class="level-dot filled hard"></div>
+        <div class="level-dot filled hard"></div>
+        <div class="level-dot filled hard"></div>
+      </div>
+      <span class="level-label">Avançado — Goku, Naruto, Mario (detalhes assimétricos, mais passos)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ROTEIRO ===================== -->
+<div id="roteiro" class="section">
+  <h2 class="section-header">📋 Roteiro do Workshop</h2>
+  <p class="section-sub">Duração total: 1 hora — ritmo ágil, sem correria</p>
+
+  <div class="alert-box info">
+    <h4>⏱️ Estratégia para 1 hora</h4>
+    <p>Com tempo limitado, o segredo é: <strong>materiais já na mesa antes das crianças chegarem</strong>, aquecimento rápido integrado ao personagem guiado, e apenas 1 personagem completo. Turmas de <strong>6 a 10 crianças</strong>, com pelo menos 1 auxiliar para cada 3. Acompanhantes terapêuticos são bem-vindos.</p>
+  </div>
+
+  <div class="alert-box warning">
+    <h4>🔑 Antes de começar (preparação)</h4>
+    <p>Chegue <strong>30 min antes</strong>. Organize cada mesa com: folhas, lápis, borracha, canetinha preta, lápis de cor e a ficha do personagem impressa. Cole o cronograma visual na mesa das crianças que precisarem. Deixe o quadro/tela pronto com a ficha ampliada. Quanto mais pronto o ambiente, mais tempo sobra para desenhar.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="time-badge">0–5 min</span>
+      <h4>🏠 Boas-vindas Rápidas</h4>
+      <p><strong>O que fazer:</strong> Receber as crianças, sentar, apresentar-se em 1 minuto. Mostrar o desenho finalizado do personagem que vão aprender ("Olha o que vocês vão conseguir fazer hoje!"). Explicar que vão desenhar passo a passo e que não tem certo ou errado.</p>
+      <p><strong>Para crianças autistas:</strong> Os materiais já na mesa criam previsibilidade. O cronograma visual já estará colado. Dar um momento para explorar os materiais com as mãos.</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="time-badge">5–10 min</span>
+      <h4>🔵 Aquecimento Relâmpago: "Formas Mágicas"</h4>
+      <p><strong>Atividade (2 min):</strong> "Vamos aquecer a mão! Desenhem comigo: um círculo grande... um retângulo... uma oval..." — rápido, solto, no canto da folha.</p>
+      <p><strong>Revelação (3 min):</strong> "Sabiam que TODO personagem começa com essas formas? Olha: o Totoro é um ovo, a Bluey é um retângulo, o Doraemon é um círculo!" — mostrar exemplos rápidos no quadro. Isso conecta o aquecimento ao método.</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="time-badge">10–35 min</span>
+      <h4>✏️ Personagem Guiado — Passo a Passo</h4>
+      <p><strong>Este é o coração do workshop.</strong> Escolha 1 personagem de nível fácil (Doraemon, Totoro ou Minion). Desenhe junto no quadro, um passo de cada vez.</p>
+      <p><strong>Ritmo:</strong> ~3 minutos por passo. Desenhe o passo, circule pelas mesas, confirme que todos acompanharam, volte ao quadro para o próximo. Use cor diferente para destacar o que é novo (azul ou vermelho, como nas referências).</p>
+      <p><strong>Frases úteis:</strong> "Sem pressa, eu espero todo mundo." / "Ficou diferente? Ótimo, é o SEU personagem!" / "Quem precisa de ajuda levanta a mão."</p>
+      <p><strong>Para crianças autistas:</strong> A ficha impressa na mesa permite acompanhar visualmente sem depender só da instrução verbal. Se uma criança adiantar passos usando a ficha, tudo bem — significa que o suporte visual está funcionando.</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="time-badge">35–50 min</span>
+      <h4>🎨 Personalização + 2º Desenho Livre</h4>
+      <p><strong>Duas opções simultâneas:</strong> quem quiser pode colorir o personagem que acabou de fazer. Quem quiser mais desafio, pode escolher uma segunda ficha (de outro personagem) e tentar sozinho consultando o passo a passo.</p>
+      <p><strong>Seu papel agora:</strong> Circular pela sala dando suporte individual. Não guiar no quadro — as fichas na mesa são o guia. Elogiar de forma específica ("que legal esse detalhe nos olhos!").</p>
+      <p><strong>Para crianças autistas:</strong> Se preferirem repetir o mesmo personagem, ótimo — repetição é aprendizagem. Ter desenhos pré-impressos para colorir como opção alternativa.</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="time-badge">50–60 min</span>
+      <h4>🏆 Mini-Galeria e Encerramento</h4>
+      <p><strong>Avisar aos 48 min:</strong> "Faltam 2 minutinhos para a gente fazer nossa galeria!" (transição previsível).</p>
+      <p><strong>Galeria rápida:</strong> Cada criança coloca o desenho na mesa ou na parede (com fita). Passear olhando os trabalhos dos colegas. Quem quiser pode contar algo sobre o seu (sem obrigação).</p>
+      <p><strong>Presente para levar:</strong> Entregar as fichas de passo a passo de todos os personagens para praticarem em casa. Isso é essencial — transforma 1 hora de workshop em semanas de prática.</p>
+      <p><strong>Frase final:</strong> "Agora vocês sabem o segredo: todo desenho começa com formas simples. Vocês são artistas!"</p>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <h4>🗺️ Resumo Visual para Colar no Quadro</h4>
+    <p style="font-family: 'Fredoka'; font-size: 1.05rem; line-height: 2;">
+      ① Boas-vindas (5 min) → ② Formas mágicas (5 min) → ③ Desenhar juntos (25 min) → ④ Colorir / 2º personagem (15 min) → ⑤ Galeria (10 min)
+    </p>
+  </div>
+</div>
+
+<!-- ===================== PERSONAGENS ===================== -->
+<div id="personagens" class="section">
+  <h2 class="section-header">🎭 Galeria de Personagens</h2>
+  <p class="section-sub">Organizados por nível de dificuldade conforme suas referências</p>
+
+  <h3 style="font-family: 'Fredoka'; color: var(--mint); margin-bottom: 16px;">🟢 Nível Fácil — Ideais para começar</h3>
+  <div class="char-grid">
+    <div class="char-card">
+      <div class="char-emoji">🐱</div>
+      <h5>Doraemon</h5>
+      <p class="steps-count">9 passos · Formas circulares</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Base: círculo grande + oval menor. Simetria quase total facilita muito.</p>
+    </div>
+    <div class="char-card">
+      <div class="char-emoji">🌳</div>
+      <h5>Totoro</h5>
+      <p class="steps-count">9 passos (ou versão 4 passos)</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Base: ovo/oval. Corpo arredondado e amigável. Sua ref. tem 2 versões!</p>
+    </div>
+    <div class="char-card">
+      <div class="char-emoji">🟡</div>
+      <h5>Minion</h5>
+      <p class="steps-count">6 passos · Muito simétrico</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Base: retângulo arredondado. Poucos detalhes, resultado reconhecível rápido.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family: 'Fredoka'; color: var(--yellow); margin-bottom: 16px; margin-top: 32px;">🟡 Nível Médio — Para quem já aqueceu</h3>
+  <div class="char-grid">
+    <div class="char-card">
+      <div class="char-emoji">🐕</div>
+      <h5>Bluey</h5>
+      <p class="steps-count">9–12 passos · Formas retangulares</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Base: retângulo para o corpo. Suas refs têm 3 versões (parada, acenando, pulando).</p>
+    </div>
+    <div class="char-card">
+      <div class="char-emoji">🐶</div>
+      <h5>Bingo</h5>
+      <p class="steps-count">9 passos · Similar à Bluey</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Mesma estrutura da Bluey — quem fez uma, consegue a outra!</p>
+    </div>
+    <div class="char-card">
+      <div class="char-emoji">🟠</div>
+      <h5>Jake (Hora de Aventura)</h5>
+      <p class="steps-count">8 passos · Orgânico</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Base: oval grande. Forma orgânica mas simples. Olhos sobrepostos são o desafio.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family: 'Fredoka'; color: var(--coral); margin-bottom: 16px; margin-top: 32px;">🔴 Nível Avançado — Para os mais confiantes</h3>
+  <div class="char-grid">
+    <div class="char-card">
+      <div class="char-emoji">⚡</div>
+      <h5>Goku (Chibi)</h5>
+      <p class="steps-count">9 passos · Cabelo complexo</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">O cabelo espetado é o maior desafio. Corpo e roupa com mais detalhes.</p>
+    </div>
+    <div class="char-card">
+      <div class="char-emoji">🍥</div>
+      <h5>Naruto (Chibi)</h5>
+      <p class="steps-count">8 passos · Acessórios detalhados</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Bandana com símbolo, marcas no rosto, cabelo espetado.</p>
+    </div>
+    <div class="char-card">
+      <div class="char-emoji">🍄</div>
+      <h5>Mario (2D Clássico)</h5>
+      <p class="steps-count">8 passos · Assimétrico, em ação</p>
+      <p style="font-size:0.82rem; color:#888; margin-top:4px;">Posição dinâmica (correndo/pulando). Mais complexo por ser assimétrico.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== INCLUSÃO ===================== -->
+<div id="inclusao" class="section">
+  <h2 class="section-header">♾️ Estratégias de Inclusão</h2>
+  <p class="section-sub">Adaptações específicas para crianças autistas e neurodivergentes</p>
+
+  <div class="card mint">
+    <h3>🗓️ Cronograma Visual</h3>
+    <p>Prepare um cronograma com imagens/pictogramas de cada etapa do workshop e cole na mesa de cada criança. Inclua ícones para: "desenhar formas", "desenhar personagem", "pausa/lanche", "colorir", "galeria". Riscar ou virar cada etapa quando concluída dá previsibilidade e controle.</p>
+  </div>
+
+  <div class="card coral">
+    <h3>🔇 Ambiente Sensorial Controlado</h3>
+    <ul>
+      <li>Evitar música alta ou muitas falas simultâneas</li>
+      <li>Iluminação natural ou suave (evitar fluorescentes intermitentes)</li>
+      <li>Reservar um "canto calmo" com almofadas onde a criança pode ir se precisar de pausa</li>
+      <li>Oferecer protetores auriculares como opção (não obrigar)</li>
+      <li>Materiais com texturas variadas: alguns preferem canetinha, outros lápis — ter opções</li>
+    </ul>
+  </div>
+
+  <div class="card yellow">
+    <h3>⏱️ Gestão do Tempo e Transições</h3>
+    <ul>
+      <li>Usar timer visual (ampulheta ou cronômetro projetado) para que todos saibam quanto tempo resta em cada atividade</li>
+      <li>Avisar 2 a 3 minutos antes de cada transição: "Daqui a pouquinho vamos mudar de atividade"</li>
+      <li>Permitir que crianças que não terminaram levem o desenho para acabar depois</li>
+      <li>Nunca pressionar para ser mais rápido — o ritmo é individual</li>
+    </ul>
+  </div>
+
+  <div class="card lavender">
+    <h3>💬 Comunicação Clara</h3>
+    <ul>
+      <li>Instruções curtas e diretas: "Agora desenhe um círculo grande no meio da folha"</li>
+      <li>Evitar metáforas ou linguagem figurada nas instruções técnicas</li>
+      <li>Demonstrar visualmente enquanto fala (multimodal)</li>
+      <li>Oferecer a ficha impressa como referência alternativa à instrução verbal</li>
+      <li>Respeitar se a criança preferir não participar da "galeria" final — participação é sempre voluntária</li>
+    </ul>
+  </div>
+
+  <div class="card sky">
+    <h3>🏆 Reforço Positivo Específico</h3>
+    <ul>
+      <li>Em vez de "que lindo!", dizer algo específico: "Adorei como você fez os olhos redondos"</li>
+      <li>Valorizar o processo, não só o resultado: "Você concentrou bem no passo 3!"</li>
+      <li>Nunca comparar desenhos entre crianças</li>
+      <li>Se uma criança quiser desenhar algo diferente do proposto, acolher: o objetivo é desenhar, não obedecer</li>
+    </ul>
+  </div>
+
+  <div class="card peach">
+    <h3>🔄 Flexibilidade é Essencial</h3>
+    <ul>
+      <li>Algumas crianças podem querer repetir o mesmo personagem várias vezes — isso é ótimo! Repetição é aprendizagem</li>
+      <li>Outras podem querer pular passos ou criar variações — acolher a criatividade</li>
+      <li>Se alguém ficar frustrado, sugerir apagar com borracha "mágica" ou recomeçar em folha nova, sem drama</li>
+      <li>Ter atividade alternativa (colorir um personagem pronto) para quem precisar de uma pausa do desenho livre</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== MATERIAIS ===================== -->
+<!-- <div id="materiais" class="section">
+  <h2 class="section-header">🎒 Lista de Materiais</h2>
+  <p class="section-sub">O que preparar antes do workshop</p>
+
+  <div class="card sky">
+    <h3>📄 Materiais por Criança</h3>
+    <div class="checklist">
+      <div class="checklist-item"><div class="check-box"></div><span>5+ folhas de papel sulfite A4 (ter sobras!)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Lápis grafite (HB ou 2B)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Borracha macia</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Canetinha preta ponta fina (para contorno final)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Lápis de cor ou canetinhas coloridas</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Apontador</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Ficha(s) de passo a passo impressa(s)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Cronograma visual (para crianças que precisem)</span></div>
+    </div>
+  </div>
+
+  <div class="card mint">
+    <h3>🏫 Materiais para o Instrutor/Espaço</h3>
+    <div class="checklist">
+      <div class="checklist-item"><div class="check-box"></div><span>Quadro branco ou flip chart grande</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Marcadores para quadro (preto + cor de destaque)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Projetor ou TV (opcional, para mostrar as fichas)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Fichas em tamanho A3 ou maior para demonstração</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Fita adesiva ou blu-tack para a "galeria"</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Certificados de participação</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Timer visual (ampulheta ou app projetado)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Lanche para a pausa</span></div>
+    </div>
+  </div>
+
+  <div class="card lavender">
+    <h3>♾️ Materiais Extras de Acessibilidade</h3>
+    <div class="checklist">
+      <div class="checklist-item"><div class="check-box"></div><span>Protetores auriculares (2–3 pares)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Fidgets/brinquedos sensoriais na mesa</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Almofadas para o "canto calmo"</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Adaptadores de pegada para lápis (engrossadores)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Desenhos pré-impressos para colorir (alternativa)</span></div>
+      <div class="checklist-item"><div class="check-box"></div><span>Pictogramas de comunicação visual</span></div>
+    </div>
+  </div>
+
+  <div class="alert-box warning">
+    <h4>⚠️ Sobre as Fichas de Passo a Passo</h4>
+    <p>Imprima as referências que você coletou em tamanho grande e com boa qualidade. O ideal é ter pelo menos 2 cópias de cada ficha: uma para demonstrar e outra para a criança consultar na mesa. Se possível, plastifique — resistem mais e podem ser reusadas.</p>
+  </div>
+</div> -->
+<!-- 
+ ===================== DICAS ===================== 
+<div id="dicas" class="section">
+  <h2 class="section-header">💡 Dicas Práticas</h2>
+  <p class="section-sub">Aprendizados que fazem a diferença na hora H</p>
+
+  <div class="card coral">
+    <h3>🎤 Como Demonstrar no Quadro</h3>
+    <ul>
+      <li>Desenhe DEVAGAR — muito mais devagar do que parece natural</li>
+      <li>Use 2 cores: preto para as linhas anteriores e azul/vermelho para o passo atual (como nas referências!)</li>
+      <li>Diga em voz alta o que está fazendo: "Agora vou fazer um semicírculo aqui em cima..."</li>
+      <li>Erre de propósito uma vez e corrija — mostra que errar é normal</li>
+      <li>Pergunte "todo mundo chegou aqui?" antes de avançar ao próximo passo</li>
+    </ul>
+  </div>
+
+  <div class="card yellow">
+    <h3>🚫 O que Evitar</h3>
+    <ul>
+      <li>Nunca dizer "isso está errado" — substituir por "e se a gente tentasse assim?"</li>
+      <li>Não forçar pintura/cor se a criança prefere só o desenho a lápis</li>
+      <li>Não comparar velocidades — "o Fulano já está no passo 5!" é desmotivador</li>
+      <li>Evitar excesso de regras — o mínimo necessário para funcionar</li>
+      <li>Não tocar no desenho da criança sem pedir — demonstre na sua própria folha</li>
+    </ul>
+  </div>
+
+  <div class="card sky">
+    <h3>📸 Registro e Continuidade</h3>
+    <ul>
+      <li>Fotografe os trabalhos (com autorização) para criar um portfólio digital do workshop</li>
+      <li>Envie as fichas de passo a passo digitalmente para as famílias depois</li>
+      <li>Sugira às famílias que continuem praticando em casa com as fichas</li>
+      <li>Se for uma série de workshops, no próximo session comece mostrando os resultados do anterior</li>
+    </ul>
+  </div>
+
+  <div class="card mint">
+    <h3>🔁 Se For uma Série de Workshops (1h cada)</h3>
+    <p>Com 1 hora por encontro, faz sentido espalhar o conteúdo em sessões focadas:</p>
+    <ul>
+      <li><strong>Encontro 1:</strong> Formas + Doraemon ou Totoro (fácil, circular)</li>
+      <li><strong>Encontro 2:</strong> Bluey ou Bingo (médio, retangular)</li>
+      <li><strong>Encontro 3:</strong> Naruto ou Goku chibi (avançado, detalhes)</li>
+      <li><strong>Encontro 4:</strong> "Crie seu personagem!" — usando os princípios aprendidos para inventar algo original</li>
+    </ul>
+    <p style="margin-top:10px;">A vantagem de 1h é que mantém a atenção concentrada e as crianças saem querendo mais — perfeito para uma série.</p>
+  </div>
+
+  <div class="alert-box">
+    <h4>✨ Lembre-se</h4>
+    <p>O objetivo não é que as crianças façam cópias perfeitas. O objetivo é que elas descubram que <strong>conseguem desenhar</strong>, que se divirtam, e que tenham ferramentas (formas simples → detalhes) para continuar criando sozinhas. Se uma criança sair do workshop pensando "eu sei desenhar!", o workshop foi um sucesso absoluto.</p>
+  </div>
+</div> -->
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
